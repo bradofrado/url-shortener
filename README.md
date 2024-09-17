@@ -56,3 +56,7 @@ To run the automated tests, run `npm run test`.
 I chose to implement tests for the unique slug generator as I wrote the function. This allowed me to easily test the functionality and setup clear expectations for the requirements of the function/how it should run.
 
 Manual testing involved generating different slugs from random urls (small and big) and making sure they redirected correctly. I also tested to make sure that invalid urls were caught on both the client and the server.
+
+![success](screenshots/success.png)
+
+![invalid](screenshots/invalid.png)
