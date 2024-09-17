@@ -15,9 +15,10 @@ import { Button } from '@/components/button';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
+import { urlSchema } from '@/utils/utils';
 
 const generateFormSchema = z.object({
-  url: z.string().url(),
+  url: urlSchema,
 });
 type GenerateFormData = z.infer<typeof generateFormSchema>;
 
