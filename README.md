@@ -5,6 +5,7 @@ This web app allows users to enter in urls of varying length and generate a shor
 ### Implementation Details
 
 <!-- Provide a short description of your implementation (technologies used, brief overview of project architecture, etc.) -->
+
 The app is implemented with the NextJS app router and typescript. The generation flow looks like the following:
 
 - The user enters in a valid url (starts with http:// or https://) into a form input.
@@ -30,7 +31,7 @@ The frontend base components are defined in the `components` folder using shadcn
 
 The backend architecture is setup with services that do not depend on any concrete implementations of the slug url generator. This will allow for easy future implementations like writing to a database without having to change much of the code.
 
-This interface is the `Shortener` interface with the methods `generateUniqueSlug` and `getUrlFromSlug`. 
+This interface is the `Shortener` interface with the methods `generateUniqueSlug` and `getUrlFromSlug`.
 
 The current implementation is the `MemoryShortener` class, which just generates and stores the slug/url in an in-memory map. This concrete implementation is initialized in `instances.ts` so that this file is the only file that has a dependency on this class.
 
@@ -39,6 +40,7 @@ The current implementation is the `MemoryShortener` class, which just generates 
 <!--
 - Include instructions on how to run your implementation locally. Be sure to include any necessary setup steps, such as installing dependencies, as well as the commands to start the application.
 -->
+
 To set things up locally, first run `npm install` then `npm run dev`.
 
 Then navigate to [http://localhost:3000](http://localhost:3000).
@@ -50,6 +52,7 @@ To run the automated tests, run `npm run test`.
 ### Testing
 
 <!-- Describe how you tested your solution (automated testing, manual testing process, screenshots, etc.) -->
+
 I chose to implement tests for the unique slug generator as I wrote the function. This allowed me to easily test the functionality and setup clear expectations for the requirements of the function/how it should run.
 
 Manual testing involved generating different slugs from random urls (small and big) and making sure they redirected correctly. I also tested to make sure that invalid urls were caught on both the client and the server.
