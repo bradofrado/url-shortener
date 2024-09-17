@@ -41,12 +41,12 @@ export const GenerateForm: React.FunctionComponent<GenerateFormProps> = ({
         setShortUrl(shortUrl);
       })
       .catch((err) => {
-        console.error(err);
+        form.setError('url', {message: err.message})
       });
   };
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name='url'
@@ -57,14 +57,16 @@ export const GenerateForm: React.FunctionComponent<GenerateFormProps> = ({
                 <Input placeholder='https://google.com' {...field} />
               </FormControl>
               <FormDescription>
-                Enter a URL to generate a short URL
+                Enter a URL and get a shortened version of it.
               </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type='submit'>Generate</Button>
-        {shortUrl ? <p>{shortUrl}</p> : null}
+        <div className='space-y-3'>
+          <Button type='submit' disabled={!form.formState.isValid} loading={form.formState.isLoading}>Generate</Button>
+          {shortUrl ? <p>Generated URL: <a className="text-sm" href={shortUrl} target="_blank">{shortUrl}</a></p> : null}
+        </div>
       </form>
     </Form>
   );
