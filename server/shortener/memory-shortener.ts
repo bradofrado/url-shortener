@@ -1,6 +1,6 @@
 import randomstring from 'randomstring'
 import { Shortener } from './types'
-import { isValidUrl } from '../utils'
+import { isValidUrl } from '../../utils/utils'
 
 /**
  * A shortener that stores the urls in memory
