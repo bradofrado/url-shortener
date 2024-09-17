@@ -13,7 +13,7 @@ export class MemoryShortener implements Shortener {
      * @param url The url to shorten
      * @returns The generated short url
      */
-    public async generateUniqueShortUrl(url: string): Promise<string> {
+    public async generateUniqueSlug(url: string): Promise<string> {
         if (!isValidUrl(url)) {
             throw new Error("Invalid url " + url)
         }
@@ -22,11 +22,15 @@ export class MemoryShortener implements Shortener {
 
         //If the generated url is not unique, try it again
         if (shortUrl in this.urls) {
-            return this.generateUniqueShortUrl(url)
+            return this.generateUniqueSlug(url)
         }
 
         this.urls[shortUrl] = url
 
         return shortUrl
+    }
+
+    public async getUrlFromSlug(shortUrl: string): Promise<string | null> {
+        return this.urls[shortUrl] || null
     }
 }
