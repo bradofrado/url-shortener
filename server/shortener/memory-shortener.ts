@@ -1,5 +1,6 @@
 import randomstring from 'randomstring'
 import { Shortener } from './types'
+import { isValidUrl } from '../utils'
 
 /**
  * A shortener that stores the urls in memory
@@ -13,6 +14,10 @@ export class MemoryShortener implements Shortener {
      * @returns The generated short url
      */
     public async generateUniqueShortUrl(url: string): Promise<string> {
+        if (!isValidUrl(url)) {
+            throw new Error("Invalid url " + url)
+        }
+        
         const shortUrl = randomstring.generate(6)
 
         //If the generated url is not unique, try it again

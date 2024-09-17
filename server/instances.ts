@@ -1,3 +1,3 @@
 import { MemoryShortener } from "./shortener/memory-shortener";
 
-export const shortener = MemoryShortener
+export const shortener = new MemoryShortener()
