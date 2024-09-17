@@ -1,5 +1,5 @@
 import { generateShortUrl } from "./actions";
-import { GenerateForm } from "./generate-form";
+import { GenerateForm } from "./components/generate-form";
 
 
 export default function Home() {
