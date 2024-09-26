@@ -7,7 +7,7 @@ export interface Shortener {
    * @param url The url to shorten
    * @returns The generated short slug
    */
-  generateUniqueSlug(url: string): Promise<string>;
+  generateUniqueSlug(props: { url: string; slug?: string }): Promise<string>;
 
   /**
    * Returns the slug for the given url if it was already generated, or null otherwise

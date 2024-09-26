@@ -8,21 +8,40 @@ import { isValidUrl } from '../../utils/utils';
 export class MemoryShortener implements Shortener {
   private urls: { [shortUrl: string]: string } = {};
 
+  private generateRandomSlug(): string {
+    const slug = randomstring.generate(6);
+    //If the generated url is not unique, try it again
+    if (slug in this.urls) {
+      return this.generateRandomSlug();
+    }
+
+    return slug;
+  }
+
   /**
    * Generates a unique short url and stores the mapping in memory
    * @param url The url to shorten
    * @returns The generated short url
    */
-  public async generateUniqueSlug(url: string): Promise<string> {
+  public async generateUniqueSlug({
+    url,
+    slug,
+  }: {
+    url: string;
+    slug?: string;
+  }): Promise<string> {
     if (!isValidUrl(url)) {
       throw new Error('Invalid url ' + url);
     }
 
-    const shortUrl = randomstring.generate(6);
+    const shortUrl = slug ?? this.generateRandomSlug();
 
-    //If the generated url is not unique, try it again
+    if (!shortUrl) {
+      throw new Error('Must specify a slug');
+    }
+
     if (shortUrl in this.urls) {
-      return this.generateUniqueSlug(url);
+      throw new Error(`Slug ${shortUrl} already exists`);
     }
 
     this.urls[shortUrl] = url;
